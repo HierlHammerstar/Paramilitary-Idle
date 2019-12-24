@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>Paramilitary idle</title>
+</head>
+<body>
+<p>
+Salary : <span id='earning_money'></span>$
+<br>
+Money : <span id='money'></span>$
+<br>
+<button onClick="bribe(1)">Bribe higher ups</button> (needs 10x as much money, increases with amount of bribes)
+<br>
+Social Skill : level <span id='sociality'></span>
+<br>
+<button onClick="speaking(1)">Practice speaking</button>
+<br>
+<button onClick="studying(1)">Study public speaking</button> (Can be turned off and on.)
+<script>
+var money = 0
+var earning_money = 25
+var sociality = 0
+var bribes = 1
+var study = 0
+function update(number) {document.getElementById("money").innerHTML = prettify(money) ; document.getElementById("earning_money").innerHTML = earning_money ; document.getElementById("sociality").innerHTML = prettify(sociality) ;}
+setInterval(update,10)
+function prettify(input){var output = Math.round(input * 1000000)/1000000;return output;}
+function money_earning(number) {money=money+earning_money}
+setInterval(money_earning,1000)
+function bribe(number) {if (money>=earning_money*10*bribes) {money=money-earning_money*10 ; earning_money = earning_money+5; bribes=bribes+1} else {money=money-(1000-sociality);alert("you were fined")} }
+function speaking(number) {sociality = sociality + 0.1}
+function studying(number) {if (study<=0) {study=1} else if (study>=1) {study=0} }
+function studying2(number) {if (study>=1) {money=money-200 ; sociality = sociality + 0.5} }
+setInterval(studying2,1000)
+</script>
+</p>
+</body>
+</html>
