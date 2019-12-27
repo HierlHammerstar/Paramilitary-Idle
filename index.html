@@ -4,6 +4,8 @@
 </head>
 <body>
 <p>
+<h1> Paramilitary Idle </h1>
+<hr>
 Salary : <span id='earning_money'></span>$ a day
 <br>
 Money : <span id='money'></span>$
@@ -19,6 +21,8 @@ Social Skill : level <span id='sociality'></span>
 <button onClick="purchase(1)">Purchase troops</button> (costs 25.000 dollars a year and on initial purchase, requires level 50 social skill.)
 <br>
 Troops : <span id='troops'></span>
+<br>
+Invade Kiribati : <button Onclick="invadeki(1)">Go to war</button>(Requires 100 troops.)
 <hr>
 Date:
 Year: <span id='year'></span> Day: <span id='day'></span>
@@ -29,6 +33,7 @@ var sociality = 0
 var bribes = 1
 var study = 0
 var troops = 0
+var kiribati = 0
 var year = 2020
 var day = 1
 function update(number) {document.getElementById("money").innerHTML = prettify(money) ; document.getElementById("earning_money").innerHTML = earning_money ; document.getElementById("sociality").innerHTML = prettify(sociality) ; document.getElementById("year").innerHTML = year ; document.getElementById("day").innerHTML = day ; document.getElementById("troops").innerHTML = troops ;}
@@ -41,10 +46,14 @@ function speaking(number) {sociality = sociality + 0.1}
 function studying(number) {if (study<=0) {study=1} else if (study>=1) {study=0} }
 function studying2(number) {if (study>=1) {money=money-200 ; sociality = sociality + 0.5} }
 setInterval(studying2,1000)
-function jail(number) {if (money<=-2000) {money=0 ; year=year+3 ; troops=0 } }
+function jail(number) {if (money<=-2000) {money=0 ; year=year+3 ; troops=0 ; alert("You went to prison for failing to pay your debts") } }
+setInterval(jail,100)
 function purchase(number) {if (money>=25000 && sociality>=50) {money=money-25000 ; troops=troops+1} }
 function maintenance(number) {if (day<=1) {money=money-troops*25000} }
 setInterval(maintenance,1000)
+function invadeki(number) {if (troops>=100 && kiribati<=0) {kiribati=1 ; alert("You have successfully conquered Kiribati") } else if (kiribati=1) {alert("You have already conquered Kiribati")} }
+function conquered(number) {if (kiribati>=1) {money=money+13000} }
+setInterval(conquered,1000)
 function waiting(number) {day=day+1}
 setInterval(waiting,1000)
 function waiting2(number) {if (day>=365) {year=year+1 ; day=1} }
