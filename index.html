@@ -16,7 +16,7 @@ Social Skill : level <span id='sociality'></span>
 <br>
 <button onClick="studying(1)">Study public speaking</button> (Can be turned off and on. Costs 200$ a day, increases social skills by 0.5 a day)
 <hr>
-<button onClick="purchase(1)">Purchase troops</button> (costs 25.000 dollars a year and on initial purchase)
+<button onClick="purchase(1)">Purchase troops</button> (costs 25.000 dollars a year and on initial purchase, requires level 50 social skill.)
 <br>
 Troops : <span id='troops'></span>
 <hr>
@@ -41,8 +41,9 @@ function speaking(number) {sociality = sociality + 0.1}
 function studying(number) {if (study<=0) {study=1} else if (study>=1) {study=0} }
 function studying2(number) {if (study>=1) {money=money-200 ; sociality = sociality + 0.5} }
 setInterval(studying2,1000)
-function purchase(number) {if (money>=25000) {money=money-25000 ; troops=troops+1} }
-function maintenance(number) {if (0>day<=1) {money=money-troops*25000} }
+function jail(number) {if (money<=-2000) {money=0 ; year=year+3 ; troops=0 } }
+function purchase(number) {if (money>=25000 && sociality>=50) {money=money-25000 ; troops=troops+1} }
+function maintenance(number) {if (day<=1) {money=money-troops*25000} }
 setInterval(maintenance,1000)
 function waiting(number) {day=day+1}
 setInterval(waiting,1000)
