@@ -26,6 +26,8 @@ Invade Kiribati : <button Onclick="invadeki(1)">Go to war</button>(Requires 100 
 <hr>
 Date:
 Year: <span id='year'></span> Day: <span id='day'></span>
+<hr>
+<button Onclick="hint(1)">Click for tips</button>
 <script>
 var money = 0
 var earning_money = 25
@@ -51,13 +53,14 @@ setInterval(jail,100)
 function purchase(number) {if (money>=25000 && sociality>=50) {money=money-25000 ; troops=troops+1} }
 function maintenance(number) {if (day<=1) {money=money-troops*25000} }
 setInterval(maintenance,1000)
-function invadeki(number) {if (troops>=100 && kiribati<=0) {kiribati=1 ; alert("You have successfully conquered Kiribati") } else if (kiribati=1) {alert("You have already conquered Kiribati")} }
+function invadeki(number) {if (troops>=100 && kiribati<=0) {kiribati=1 ; alert("You have successfully conquered Kiribati") } }
 function conquered(number) {if (kiribati>=1) {money=money+13000} }
 setInterval(conquered,1000)
 function waiting(number) {day=day+1}
 setInterval(waiting,1000)
 function waiting2(number) {if (day>=365) {year=year+1 ; day=1} }
 setInterval(waiting2,1000)
+function hint(number) {alert("Soldiers are paied the first day of the year, you could get enough 100 troops at once after the 1st of january then invade Kiribati which gives you 13000$ a day") }
 </script>
 </p>
 </body>
