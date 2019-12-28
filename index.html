@@ -10,15 +10,17 @@ Salary : <span id='earning_money'></span>$ a day
 <br>
 Money : <span id='money'></span>$
 <br>
-<button onClick="bribe(1)">Bribe higher ups</button> (needs 10x as much money, increases with amount of bribes)
+<button onClick="bribe(1)">Bribe higher ups</button> (needs 10x as much money multiplied by the amount of bribes)
 <br>
 Social Skill : level <span id='sociality'></span>
 <br>
 <button onClick="speaking(1)">Practice speaking</button>
 <br>
 <button onClick="studying(1)">Study public speaking</button> (Can be turned off and on. Costs 200$ a day, increases social skills by 0.5 a day)
+<br>
+Amounts of bribes : <span id='bribes'></span>
 <hr>
-<button onClick="purchase(1)">Purchase troops</button> (costs 25.000 dollars a year and on initial purchase, requires level 50 social skill.)
+<button onClick="purchase(1)">Purchase troops</button> (costs 25.000 dollars a year and on initial purchase, requires level 25 social skill.)
 <br>
 Troops : <span id='troops'></span>
 <br>
@@ -38,7 +40,7 @@ var troops = 0
 var kiribati = 0
 var year = 2020
 var day = 1
-function update(number) {document.getElementById("money").innerHTML = prettify(money) ; document.getElementById("earning_money").innerHTML = earning_money ; document.getElementById("sociality").innerHTML = prettify(sociality) ; document.getElementById("year").innerHTML = year ; document.getElementById("day").innerHTML = day ; document.getElementById("troops").innerHTML = troops ;}
+function update(number) {document.getElementById("money").innerHTML = prettify(money) ; document.getElementById("earning_money").innerHTML = earning_money ; document.getElementById("sociality").innerHTML = prettify(sociality) ; document.getElementById("year").innerHTML = year ; document.getElementById("day").innerHTML = day ; document.getElementById("troops").innerHTML = troops ; document.getElementById("bribes").innerHTML = bribes ;}
 setInterval(update,10)
 function prettify(input){var output = Math.round(input * 1000000)/1000000;return output;}
 function money_earning(number) {money=money+earning_money}
@@ -50,7 +52,7 @@ function studying2(number) {if (study>=1) {money=money-200 ; sociality = sociali
 setInterval(studying2,1000)
 function jail(number) {if (money<=-2000) {money=0 ; year=year+3 ; troops=0 ; alert("You went to prison for failing to pay your debts") } }
 setInterval(jail,100)
-function purchase(number) {if (money>=25000 && sociality>=50) {money=money-25000 ; troops=troops+1} }
+function purchase(number) {if (money>=25000 && sociality>=25) {money=money-25000 ; troops=troops+1} }
 function maintenance(number) {if (day<=1) {money=money-troops*25000} }
 setInterval(maintenance,1000)
 function invadeki(number) {if (troops>=100 && kiribati<=0) {kiribati=1 ; alert("You have successfully conquered Kiribati") } }
