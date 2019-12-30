@@ -1,6 +1,7 @@
 <html>
 <head>
 <title>Paramilitary idle</title>
+
 </head>
 <body>
 <p>
@@ -30,6 +31,8 @@ Date:
 Year: <span id='year'></span> Day: <span id='day'></span>
 <hr>
 <button Onclick="hint(1)">Click for tips</button>
+<br>
+<button Onclick=localStorage.removeItem("save")>Click here to delete save</button>
 <script>
 var money = 0
 var earning_money = 25
@@ -62,6 +65,19 @@ function waiting(number) {day=day+1}
 setInterval(waiting,1000)
 function waiting2(number) {if (day>=365) {year=year+1 ; day=1} }
 setInterval(waiting2,1000)
+function save() {var save = {money: money, earning_money: earning_money, sociality: sociality, bribes: bribes, study: study, troops: troops, kiribati: kiribati, year: year, day: day }; localStorage.setItem("save",JSON.stringify(save));}
+setInterval(save,10000)
+var savegame = JSON.parse(localStorage.getItem("save"))
+function load() {var savegame = JSON.parse(localStorage.getItem("save"));}
+if (typeof savegame.money !== "undefined") money = savegame.money
+if (typeof savegame.year !== "undefined") year = savegame.year
+if (typeof savegame.day !== "undefined") day = savegame.day
+if (typeof savegame.sociality !== "undefined") sociality = savegame.sociality
+if (typeof savegame.earning_money !== "undefined") earning_money = savegame.earning_money
+if (typeof savegame.bribes !== "undefined") bribes = savegame.bribes
+if (typeof savegame.study !== "undefined") study = savegame.study
+if (typeof savegame.troops !== "undefined") troops = savegame.troops
+if (typeof savegame.kiribati !== "undefined") kiribati = savegame.kiribati
 function hint(number) {alert("Soldiers are paied the first day of the year, you could get enough 100 troops at once after the 1st of january then invade Kiribati which gives you 13000$ a day") }
 </script>
 </p>
